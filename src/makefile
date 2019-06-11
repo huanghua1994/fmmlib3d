@@ -44,8 +44,8 @@ ifeq ($(HOST),linux-gfortran-openmp)
 OBJSUF=o
 MODSUF=mod
 FC=gfortran -c 
-FFLAGS=-O3 --openmp
-FLINK=gfortran -o $(PROJECT) --openmp
+FFLAGS=-O3 -fopenmp
+FLINK=gfortran -o $(PROJECT) -fopenmp
 ### export OMP_NUM_THREADS=4
 ### export OMP_STACKSIZE=1024M
 

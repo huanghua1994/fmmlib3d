@@ -1354,6 +1354,7 @@ c ... Get potential and field as per required
 c
 c     Field is - grad(pot).
 c
+      if (d.lt.1.0e-14) d=1.0e0
       dinv=1.0d0/d
       pot=charge*dinv
 c

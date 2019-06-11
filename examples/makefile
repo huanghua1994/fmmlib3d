@@ -14,13 +14,13 @@ lfmm3dtria:
 hfmm3dpart-openmp:
 	make -f hfmm3dpart.make HOST=linux-gfortran-openmp -j4
 
-cfmm3dpart-openmp:
+lfmm3dpart-openmp:
 	make -f lfmm3dpart.make HOST=linux-gfortran-openmp -j4
 
 hfmm3dtria-openmp:
 	make -f hfmm3dtria.make HOST=linux-gfortran-openmp -j4
 
-cfmm3dtria-openmp:
+lfmm3dtria-openmp:
 	make -f lfmm3dtria.make HOST=linux-gfortran-openmp -j4
 
 clean: 

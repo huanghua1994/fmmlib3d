@@ -1,5 +1,6 @@
 *.o
 *.int
+*.a
 fort.*
 *~
 octave-core

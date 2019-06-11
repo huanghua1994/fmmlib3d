@@ -42,7 +42,7 @@ c     file fort.13.
 c
         call prini(6,13)
 c
-        nsource= 16000
+        nsource=16000
 c
 c     construct randomly located charge distribution on a unit sphere
 c 
@@ -59,11 +59,9 @@ c     construct target distribution on a target unit sphere
 c
         ntarget=nsource
         do i=1,ntarget
-           theta=hkrand(0)*pi
-           phi=hkrand(0)*2*pi
-           target(1,i)=.5d0*cos(phi)*sin(theta) + 2
-           target(2,i)=.5d0*sin(phi)*sin(theta)
-           target(3,i)=.5d0*cos(theta)
+            target(1,i) = source(1,i)
+            target(2,i) = source(2,i)
+            target(3,i) = source(3,i)
         enddo
 c
         call prinf('ntarget=*',ntarget,1)
@@ -76,13 +74,13 @@ c
 c     set source type flags and output flags
 c
         ifpot=1
-        iffld=1
+        iffld=0
 c
         ifcharge=1
-        ifdipole=1
+        ifdipole=0
 c
-        ifpottarg=1
-        iffldtarg=1
+        ifpottarg=0
+        iffldtarg=0
 c
 c       set source strengths
 c
@@ -127,7 +125,8 @@ c
 c       
 c     call direct calculation with subset of points to assess accuracy
 c
-        m=min(nsource,100)
+c        m=min(nsource,100)
+        m=nsource
 c
 c     ifprint=0 suppresses printing of source locations
 c     ifprint=1 turns on printing of source locations

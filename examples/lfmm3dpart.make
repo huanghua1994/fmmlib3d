@@ -46,8 +46,8 @@ ifeq ($(HOST),linux-gfortran-openmp)
 OBJSUF=o
 MODSUF=mod
 FC=gfortran -c 
-FFLAGS=-O3 --openmp
-FLINK=gfortran -o $(PROJECT) --openmp
+FFLAGS=-O3 -fopenmp
+FLINK=gfortran -o $(PROJECT) -fopenmp
 ### export OMP_NUM_THREADS=4
 ### export OMP_STACKSIZE=1024M
 
@@ -172,7 +172,7 @@ FSRCS = lfmm3dpart_driver.f lfmm3dpart.f lfmm3drouts.f \
      prini.f l3dterms.f laprouts3d.f l3dtrans.f \
      prinm.f yrecursion.f \
      legeexps.f rotviarecur3.f \
-     hkrand.f dlaran.f 
+     hkrand.f dlaran.f trilib.f
 
 ifeq ($(WITH_SECOND),1) 
 FSRCS += second-r8.f
