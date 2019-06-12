@@ -15,7 +15,7 @@ hfmm3dpart-openmp:
 	make -f hfmm3dpart.make HOST=linux-gfortran-openmp -j4
 
 lfmm3dpart-openmp:
-	make -f lfmm3dpart.make HOST=linux-gfortran-openmp -j4
+	make -f lfmm3dpart.make HOST=linux-ifort-openmp -j4
 
 hfmm3dtria-openmp:
 	make -f hfmm3dtria.make HOST=linux-gfortran-openmp -j4

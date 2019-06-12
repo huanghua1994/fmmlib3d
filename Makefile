@@ -21,10 +21,10 @@ EXAMPLES = ./examples
 MWRAP = ./contrib/mwrap-0.33.3
 
 test: 
-	cd $(EXAMPLES); $(MAKE) clean lfmm3dpart
+	cd $(EXAMPLES); $(MAKE) lfmm3dpart
 
 test-openmp: 
-	cd $(EXAMPLES); $(MAKE) clean lfmm3dpart-openmp
+	cd $(EXAMPLES); $(MAKE) lfmm3dpart-openmp
 
 lib: 
 	cd $(SRC); $(MAKE) 

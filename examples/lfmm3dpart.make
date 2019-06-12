@@ -8,6 +8,16 @@ HOST=macosx
 ##HOST=linux-intel
 
 
+ifeq ($(HOST),linux-ifort-openmp)
+
+OBJSUF=o
+MODSUF=mod
+FC=ifort -c 
+FFLAGS=-O3 -qopenmp -xHost
+FLINK=ifort -o $(PROJECT) -qopenmp
+
+else
+
 ifeq ($(HOST),linux)
 
 OBJSUF=o
@@ -138,6 +148,7 @@ FC=lf95 -c
 FFLAGS=-O1
 FLINK=lf95 -out $(PROJECT)
 
+endif
 endif
 endif
 endif

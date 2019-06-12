@@ -42,20 +42,24 @@ c     file fort.13.
 c
         call prini(6,13)
 c
-        nsource=16000
 c
 c     construct randomly located charge distribution on a unit sphere
-c 
-        d=hkrand(0)
-        do i=1,nsource
-           theta=hkrand(0)*pi
-           phi=hkrand(0)*2*pi
-           source(1,i)=.5d0*cos(phi)*sin(theta)
-           source(2,i)=.5d0*sin(phi)*sin(theta)
-           source(3,i)=.5d0*cos(theta)
-        enddo
+c
+c        nsource=16000
+c        d=hkrand(0)
+c        do i=1,nsource
+c           theta=hkrand(0)*pi
+c           phi=hkrand(0)*2*pi
+c           source(1,i)=.5d0*cos(phi)*sin(theta)
+c           source(2,i)=.5d0*sin(phi)*sin(theta)
+c           source(3,i)=.5d0*cos(theta)
+c        enddo
 c
 c     construct target distribution on a target unit sphere 
+c
+		ir = 114514
+		open(unit=ir,file='coord.txt')
+		call coordread(ir, source, nsource)
 c
         ntarget=nsource
         do i=1,ntarget
@@ -101,7 +105,8 @@ c
 c
 c     initialize timing call
 c
-        t1=second()
+c        t1=second()
+		call cpu_time(t1)
 C$        t1=omp_get_wtime()
 c       
 c     call FMM3D routine for sources and targets
@@ -113,7 +118,8 @@ c
 c       
 c     get time for FMM call
 c
-        t2=second()
+c        t2=second()
+		call cpu_time(t2)
 C$        t2=omp_get_wtime()
 c       
 c       
@@ -156,7 +162,8 @@ c
            endif
         enddo
 c        
-        t1=second()
+c        t1=second()
+		call cpu_time(t1)
 C$        t1=omp_get_wtime()
 c
 C$OMP PARALLEL DO DEFAULT(SHARED)
@@ -191,7 +198,8 @@ cccC$OMP$NUM_THREADS(4)
         enddo
 C$OMP END PARALLEL DO
 c
-        t2=second()
+c        t2=second()
+		call cpu_time(t2)
 C$        t2=omp_get_wtime()
 c
 c       ifprint=1 turns on printing of first m values of potential and field
@@ -226,7 +234,8 @@ c
            endif
         enddo
 c        
-        t1=second()
+c        t1=second()
+		call cpu_time(t1)
 C$        t1=omp_get_wtime()
 c
 C$OMP PARALLEL DO DEFAULT(SHARED)
@@ -262,7 +271,8 @@ c
         enddo
 C$OMP END PARALLEL DO
 c
-        t2=second()
+c        t2=second()
+		call cpu_time(t2)
 C$        t2=omp_get_wtime()
 c
 c

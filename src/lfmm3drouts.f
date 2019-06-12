@@ -186,7 +186,8 @@ c
 c
          if (ifprint .ge. 1) 
      $      call prinf('=== STEP 3 (merge mp) ===*',i,0)
-         t1=second()
+c         t1=second()
+		call cpu_time(t1)
 C$        t1=omp_get_wtime()
 c
 c       ... step 3, merge all multipole expansions
@@ -280,14 +281,16 @@ ccc        stop
 c      END DEBUGGING SEGMENT
 c------------------------------------------------------------
 c
-         t2=second()
+c         t2=second()
+		call cpu_time(t2)
 C$        t2=omp_get_wtime()
 ccc        call prin2('time=*',t2-t1,1)
          timeinfo(3)=t2-t1
 c
         if (ifprint .ge. 1)
      $     call prinf('=== STEP 4 (mp to lo) ===*',i,0)
-        t1=second()
+c        t1=second()
+		call cpu_time(t1)
 C$        t1=omp_get_wtime()
 c
 c       ... precompute rotation matrices, useful up to order 10 or so
@@ -482,14 +485,16 @@ ccc        write(*,*) 'ntops:', ntops
 ccc        write(*,*) 'speed:', ntops/(second()-t1)
  4300   continue
 c
-        t2=second()
+c        t2=second()
+		call cpu_time(t2)
 C$        t2=omp_get_wtime()
 ccc     call prin2('time=*',t2-t1,1)
         timeinfo(4)=t2-t1
 c       
         if (ifprint .ge. 1) 
      $     call prinf('=== STEP 5 (split lo) ===*',i,0)
-        t1=second()
+c        t1=second()
+		call cpu_time(t1)
 C$        t1=omp_get_wtime()
 c
 c       ... step 5, split all local expansions
@@ -557,7 +562,8 @@ c
 C$OMP END PARALLEL DO
  5300   continue
 c       
-        t2=second()
+c        t2=second()
+		call cpu_time(t2)
 C$        t2=omp_get_wtime()
 ccc     call prin2('time=*',t2-t1,1)
         timeinfo(5)=t2-t1

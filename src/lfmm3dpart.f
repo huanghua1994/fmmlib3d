@@ -304,7 +304,8 @@ c
 c
 c     create oct-tree data structure
 c
-        t1=second()
+c        t1=second()
+		call cpu_time(t1)
 C$        t1=omp_get_wtime()
         ntot = 100*(nsource+ntarget)+10000
         do ii = 1,10
@@ -328,7 +329,8 @@ C$        t1=omp_get_wtime()
            ier = 4
            return
         endif
-        t2=second()
+c        t2=second()
+		call cpu_time(t2)
 C$        t2=omp_get_wtime()
         if( ifprint .eq. 1 ) call prin2('time in d3tstrcr=*',t2-t1,1)
 c
@@ -480,7 +482,8 @@ c
         ifevalfar=1
         ifevalloc=1
 c
-        t1=second()
+c        t1=second()
+		call cpu_time(t1)
 C$        t1=omp_get_wtime()
         call lfmm3dparttargmain(ier,iprec,
      $     ifevalfar,ifevalloc,
@@ -493,7 +496,8 @@ C$        t1=omp_get_wtime()
      $     epsfmm,w(iiaddr),wrmlexp(irmlexp),w(imptemp),lmptemp,
      $     nboxes,laddr,nlev,scale,bsize,nterms,
      $     wlists(iwlists),lwlists)
-        t2=second()
+c        t2=second()
+		call cpu_time(t2)
 C$        t2=omp_get_wtime()
         if( ifprint .eq. 1 ) call prin2('time in fmm main=*',t2-t1,1)
 c
@@ -689,7 +693,8 @@ C$OMP END PARALLEL DO
 c
 c
         if (ifprint .ge. 1) call prinf('=== STEP 1 (form mp) ====*',i,0)
-        t1=second()
+c        t1=second()
+		call cpu_time(t1)
 C$        t1=omp_get_wtime()
 c
 c       ... step 1, locate all charges, assign them to boxes, and
@@ -769,13 +774,15 @@ c
 C$OMP END PARALLEL DO
  1300    continue
 c
-         t2=second()
+c         t2=second()
+         call cpu_time(t2)
 C$        t2=omp_get_wtime()
 ccc        call prin2('time=*',t2-t1,1)
          timeinfo(1)=t2-t1
 c       
         if (ifprint .ge. 1) call prinf('=== STEP 2 (form lo) ====*',i,0)
-        t1=second()
+c        t1=second()
+		call cpu_time(t1)
 C$        t1=omp_get_wtime()
 c
 c-----------------------------------------------------------------------
@@ -868,7 +875,8 @@ c
  3251    continue
 C$OMP END PARALLEL DO
 c
-         t2=second()
+c         t2=second()
+		call cpu_time(t2)
 C$        t2=omp_get_wtime()
 ccc        call prin2('time=*',t2-t1,1)
          timeinfo(2)=t2-t1
@@ -893,7 +901,8 @@ c
 c
 c
         if (ifprint .ge. 1) call prinf('=== STEP 6 (eval mp) ====*',i,0)
-        t1=second()
+c        t1=second()
+		call cpu_time(t1)
 C$        t1=omp_get_wtime()
 c
 c-----------------------------------------------------------------------
@@ -984,7 +993,8 @@ c
 C$OMP END PARALLEL DO
 c
 c
-        t2=second()
+c        t2=second()
+		call cpu_time(t2)
 C$        t2=omp_get_wtime()
 ccc     call prin2('time=*',t2-t1,1)
         timeinfo(6)=t2-t1
@@ -994,7 +1004,8 @@ c       Step 7: Evaluate the local expansions for all relevant sources/targets.
 c-----------------------------------------------------------------------
 c
         if (ifprint .ge. 1) call prinf('=== STEP 7 (eval lo) ====*',i,0)
-        t1=second()
+c        t1=second()
+		call cpu_time(t1)
 C$        t1=omp_get_wtime()
 c
 c       ... step 7, evaluate local expansions
@@ -1054,7 +1065,8 @@ c
 c
  6201   continue
 C$OMP END PARALLEL DO
-        t2=second()
+c        t2=second()
+		call cpu_time(t2)
 C$        t2=omp_get_wtime()
 ccc     call prin2('time=*',t2-t1,1)
         timeinfo(7)=t2-t1
@@ -1066,7 +1078,8 @@ c
         if( ifevalloc .eq. 0 ) goto 9000
 c 
         if (ifprint .ge. 1) call prinf('=== STEP 8 (direct) =====*',i,0)
-        t1=second()
+c        t1=second()
+		call cpu_time(t1)
 C$        t1=omp_get_wtime()
 c
 c-----------------------------------------------------------------------
@@ -1143,7 +1156,8 @@ c
 ccc        call prin2('inside fmm, pot=*',pot,2*nsource)
 c
 c
-        t2=second()
+c        t2=second()
+		call cpu_time(t2)
 C$        t2=omp_get_wtime()
 ccc     call prin2('time=*',t2-t1,1)
         timeinfo(8)=t2-t1

@@ -106,7 +106,20 @@ c
         end
 c
 c
-c
+c***********************************************************************
+        subroutine coordread(ir, coords, ncoord)
+        implicit real *8 (a-h,o-z)
+        dimension coords(3,1)
+        open(unit=ir, status="OLD", iostat=istat)
+        if (istat .ne. 0) then
+            write(*,*)"in atriread, OPEN statement iostat = ", istat
+            stop
+        endif
+        read(ir,*) ncoord
+        read(ir,*) (coords(1,j),coords(2,j),coords(3,j),j=1,ncoord) 
+        return
+        end
+c***********************************************************************
 c
 c***********************************************************************
         subroutine atriwrite(iw,verts,nverts,ifaces,nfaces)
