@@ -4,7 +4,7 @@ PROJECT=int2         # for historical reasons we always like to
 
 ###HOST=windows
 #HOST=linux
-HOST=macosx
+HOST=linux-ifort-openmp
 ##HOST=linux-intel
 
 

@@ -257,9 +257,13 @@ c
         real *8, allocatable :: wlists(:)
         real *8, allocatable :: wrmlexp(:)
         complex *16 ptemp,ftemp(3)
-c       
+        real *8 st,et
         data ima/(0.0d0,1.0d0)/
 c       
+c
+        call cpu_time(st)
+C$        st=omp_get_wtime()
+c
         ier=0
         lused7 = 0
 c       
@@ -482,6 +486,12 @@ c
         ifevalfar=1
         ifevalloc=1
 c
+        call cpu_time(et)
+C$        et=omp_get_wtime()
+c
+        if( ifprint .eq. 1 ) call prin2('Before FMM main = *',et-st,1)
+c
+c
 c        t1=second()
 		call cpu_time(t1)
 C$        t1=omp_get_wtime()
@@ -499,7 +509,7 @@ C$        t1=omp_get_wtime()
 c        t2=second()
 		call cpu_time(t2)
 C$        t2=omp_get_wtime()
-        if( ifprint .eq. 1 ) call prin2('time in fmm main=*',t2-t1,1)
+        if( ifprint .eq. 1 ) call prin2('In FMM main = *',t2-t1,1)
 c
 c       parameter ier from targmain routine is currently meaningless, reset to 0
         if( ier .ne. 0 ) ier = 0
