@@ -282,9 +282,9 @@ c
         if( iprec .eq. -1 ) epsfmm=.5d-1
         if( iprec .eq. 0 ) epsfmm=.5d-2
         if( iprec .eq. 1 ) epsfmm=.5d-3
-        if( iprec .eq. 2 ) epsfmm=.5d-6
-        if( iprec .eq. 3 ) epsfmm=.5d-9
-        if( iprec .eq. 4 ) epsfmm=.5d-12
+        if( iprec .eq. 2 ) epsfmm=0.999d-6
+        if( iprec .eq. 3 ) epsfmm=0.999d-9
+        if( iprec .eq. 4 ) epsfmm=0.999d-12
         if( iprec .eq. 5 ) epsfmm=.5d-15
         if( iprec .eq. 6 ) epsfmm=0
 c       

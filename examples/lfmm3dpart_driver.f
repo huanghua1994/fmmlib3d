@@ -30,7 +30,9 @@ c
 c       
         complex *16 ima
         data ima/(0.0d0,1.0d0)/
+c
         character*80 inf
+        real *8 fmmtime(5)
 c
         done=1
         pi=4*atan(done)
@@ -59,6 +61,7 @@ c
 c     construct target distribution on a target unit sphere 
 c
         call getarg(1,inf)
+        write (*,*) inf
         ir = 114514
         open(unit=ir,file=inf)
         call coordread(ir, source, nsource)
@@ -107,24 +110,22 @@ c
 c
 c     initialize timing call
 c
-c        t1=second()
-        call cpu_time(t1)
-C$        t1=omp_get_wtime()
-c       
+        do i=1,5
+            call cpu_time(t1)
+C$          t1=omp_get_wtime()
 c     call FMM3D routine for sources and targets
+            call lfmm3dparttarg(ier,iprec,
+     $          nsource,source,ifcharge,charge,ifdipole,dipstr,dipvec,
+     $          ifpot,pot,iffld,fld,ntarget,target,
+     $          ifpottarg,pottarg,iffldtarg,fldtarg)
+c       
+            call cpu_time(t2)
+C$            t2=omp_get_wtime()
+            fmmtime(i)=t2-t1
+        enddo
+        call prin2('FMM main time=*',fmmtime,5)
+c       
 c
-        call lfmm3dparttarg(ier,iprec,
-     $     nsource,source,ifcharge,charge,ifdipole,dipstr,dipvec,
-     $     ifpot,pot,iffld,fld,ntarget,target,
-     $     ifpottarg,pottarg,iffldtarg,fldtarg)
-c       
-c     get time for FMM call
-c
-c        t2=second()
-        call cpu_time(t2)
-C$        t2=omp_get_wtime()
-c       
-c       
         call prinf('nsource=*',nsource,1)
         call prinf('ntarget=*',ntarget,1)
         call prin2('after fmm, time (sec)=*',t2-t1,1)
@@ -329,9 +330,9 @@ c
            a=a+abs(pot1(i))**2
         enddo
 c       
-        d=d/n
+c        d=d/n
         d=sqrt(d)
-        a=a/n
+c        a=a/n
         a=sqrt(a)
 c       
         ae=d
