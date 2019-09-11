@@ -30,6 +30,7 @@ c
 c       
         complex *16 ima
         data ima/(0.0d0,1.0d0)/
+        character*80 inf
 c
         done=1
         pi=4*atan(done)
@@ -57,9 +58,10 @@ c        enddo
 c
 c     construct target distribution on a target unit sphere 
 c
-		ir = 114514
-		open(unit=ir,file='coord.txt')
-		call coordread(ir, source, nsource)
+        call getarg(1,inf)
+        ir = 114514
+        open(unit=ir,file=inf)
+        call coordread(ir, source, nsource)
 c
         ntarget=nsource
         do i=1,ntarget
@@ -106,7 +108,7 @@ c
 c     initialize timing call
 c
 c        t1=second()
-		call cpu_time(t1)
+        call cpu_time(t1)
 C$        t1=omp_get_wtime()
 c       
 c     call FMM3D routine for sources and targets
@@ -119,7 +121,7 @@ c
 c     get time for FMM call
 c
 c        t2=second()
-		call cpu_time(t2)
+        call cpu_time(t2)
 C$        t2=omp_get_wtime()
 c       
 c       
@@ -163,7 +165,7 @@ c
         enddo
 c        
 c        t1=second()
-		call cpu_time(t1)
+        call cpu_time(t1)
 C$        t1=omp_get_wtime()
 c
 C$OMP PARALLEL DO DEFAULT(SHARED)
@@ -199,7 +201,7 @@ cccC$OMP$NUM_THREADS(4)
 C$OMP END PARALLEL DO
 c
 c        t2=second()
-		call cpu_time(t2)
+        call cpu_time(t2)
 C$        t2=omp_get_wtime()
 c
 c       ifprint=1 turns on printing of first m values of potential and field
@@ -235,7 +237,7 @@ c
         enddo
 c        
 c        t1=second()
-		call cpu_time(t1)
+        call cpu_time(t1)
 C$        t1=omp_get_wtime()
 c
 C$OMP PARALLEL DO DEFAULT(SHARED)
@@ -272,7 +274,7 @@ c
 C$OMP END PARALLEL DO
 c
 c        t2=second()
-		call cpu_time(t2)
+        call cpu_time(t2)
 C$        t2=omp_get_wtime()
 c
 c
